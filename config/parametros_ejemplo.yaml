@@ -1,0 +1,85 @@
+# PARAMETROS DE EJEMPLO - VALORES FICTICIOS
+# =========================================
+# Este archivo solo documenta el ESQUEMA que espera el codigo y permite
+# importar los modulos / correr las pruebas que no dependen de datos.
+# NINGUN valor corresponde al sitio real (Fm. La Paz / Fm. Esmeraldas) ni a
+# resultados del proyecto SHAKTI. Para trabajar con datos reales cree
+# datos/parametros.yaml (ignorado por git) o defina SHAKTI_PARAMS=<ruta>.
+ficticio: true
+
+roca:
+  phi: 0.25            # porosidad reservorio [-]
+  phi_sello: 0.30      # porosidad sello [-]
+  rho_brina_kg_l: 1.02 # densidad brina [kg/L]
+
+etapas:                # anos
+  t_fin_extraccion_anos: 5.0
+  t_fin_inyeccion_anos: 25.0
+  t_fin_anos: 40.0
+
+columna:               # indices de celda (k) y geometria [m]
+  k_sello: 10
+  k_fondo: 35
+  k_inyeccion: 15
+  k_inyeccion_fondo: 30
+  dz_m: 10.0
+  dz_sello_m: 8.0
+  dx_malla_original_m: 100.0
+  dy_malla_original_m: 100.0
+  dx_malla_refinada_m: 40.0
+  dy_malla_refinada_m: 40.0
+
+darcy:                 # permeabilidades [mD]
+  k_res_md: 100.0
+  k_sello_md: 1.0
+  refinada_especial:   # par K alternativo para un escenario de la malla refinada
+    tasa_m3d: 10000
+    k_res_md: 80.0
+    k_sello_md: 2.0
+
+escenarios:            # tasas de inyeccion [m3/d]; la primera es la de referencia
+  tasas_m3d: [10000, 20000, 40000, 80000]
+  tasas_por_malla:
+    malla_original: [10000, 20000, 40000, 80000]
+    malla_refinada: [10000, 40000, 80000]
+
+brina:                 # SOLUTION PHREEQC (mg/L)
+  temp_c: 50.0
+  pH: 7.0
+  pe: 4.0
+  density: 1.02
+  mg_l:
+    Na: 10000.0
+    Mg: 100.0
+    Ca: 500.0
+    Fe: 1.0
+    Cl: 16000.0
+    Alkalinity: "100.0 as HCO3"
+    S(6): "10.0 as SO4"
+    K: 50.0
+
+xrd_sello:             # % peso por muestra XRD del sello
+  - {Cuarzo: 80.0, Microclina: 0.0, Ortoclasa: 0.0, Albita: 5.0, Calcita: 1.0, Dolomita: 0.0, Pirita: 0.0, Ilita: 4.0, Esmectita: 0.0, Clorita: 0.0, Caolinita: 6.0, Moscovita: 4.0}
+  - {Cuarzo: 70.0, Microclina: 0.0, Ortoclasa: 0.0, Albita: 5.0, Calcita: 3.0, Dolomita: 1.0, Pirita: 0.0, Ilita: 4.0, Esmectita: 0.0, Clorita: 0.0, Caolinita: 12.0, Moscovita: 5.0}
+
+# moles por receta de 1 L de roca
+inventario_eq_reservorio: {Calcite: 0.5, Pyrite: 0.1, Dawsonite: 0.0, Ankerite: 0.0, Gypsum: 0.0, Dolomite: 0.0}
+inventario_kin_reservorio: {Quartz: 25.0, K-feldspar: 0.5, Albite: 0.01, Chlorite(14A): 0.05, Illite: 0.1, Kaolinite: 0.5, Ca-Montmorillonite: 0.02, Siderite: 0.05}
+
+cinetica_inventario:   # m [mol] y area superficial reactiva [m2] (PK2004)
+  Quartz: {m: 25.0, area: 100.0}
+  K-feldspar: {m: 0.5, area: 10.0}
+  Albite: {m: 0.01, area: 0.1}
+  Chlorite(14A): {m: 0.05, area: 100.0}
+  Illite: {m: 0.1, area: 500.0}
+  Kaolinite: {m: 0.5, area: 1000.0}
+  Ca-Montmorillonite: {m: 0.02, area: 100.0}
+  Siderite: {m: 0.05, area: 5.0}
+  K-mica: {m: 0.0, area: 5000.0}
+  Calcite: {m: 0.5, area: 0.5}
+
+pruebas:               # rangos esperados usados por las pruebas con datos reales
+  n_nodos_tiempo: 100
+  v_poro_k15_m3: [1000, 90000]
+  v_media_m_por_ano: [0.1, 100.0]
+  v_frente_inyeccion_m_por_ano: [0.1, 100.0]

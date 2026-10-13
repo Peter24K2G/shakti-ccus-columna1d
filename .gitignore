@@ -1,0 +1,26 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.ipynb_checkpoints/
+# datos y salidas (no se publican)
+datos/
+corridas/
+figuras/
+resultados/
+salidas/
+*.xlsx
+*.xls
+*.csv
+*.pqo
+*.pqi
+*.out
+*.sel
+*.png
+*.gif
+*.pdf
+*.zip# plantilla semilla met2 (valores ficticios) si se versiona
+!met2_transporte_phreeqc/plantillas/*.pqi
+# parametros reales del proyecto (nunca versionar)
+parametros.yaml

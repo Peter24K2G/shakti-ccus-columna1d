@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Si usa este software, por favor cítelo así / If you use this software, please cite it as below."
+title: "shakti-ccus-columna1d: columna 1D de transporte reactivo para almacenamiento de CO2 (Fm. La Paz / sello Fm. Esmeraldas)"
+type: software
+# TODO (Pedro): confirmar coautores y orden (capítulo de julio: Romero, P., Rendón, J., … Donado, L. D.)
+authors:
+  - family-names: "Romero León"
+    given-names: "Pedro José"
+    affiliation: "Universidad Nacional de Colombia, Facultad de Ingeniería (proyecto SHAKTI)"
+license: MIT
+version: "1.0.0"
+keywords: [CCUS, CO2 storage, reactive transport, PHREEQC, SHAKTI]

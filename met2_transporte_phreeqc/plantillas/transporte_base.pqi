@@ -1,0 +1,93 @@
+# =============================================================================
+# SEMILLA sintactica met2 — columna 1D TRANSPORT (rama k15 -> k10, 6 celdas)
+# NO es un modelo final: numeros ilustrativos y FICTICIOS (ver config/parametros_ejemplo.yaml). El generador (generador.py)
+# produce la version real con parametros calibrados (calibracion.py) y
+# quimica compartida (ccus_columna.quimica).
+# Celda PHREEQC 1 = celda Cirrus k15 (entrada) ... celda 6 = k10 (SELLO).
+# =============================================================================
+
+PHASES
+Dawsonite
+    NaAlCO3(OH)2 + 3 H+ = Al+3 + HCO3- + Na+ + 2 H2O
+    log_k 4.3464
+    -delta_h -76.3549 kJ/mol
+    -analytic -113.93 -0.023487 7175.8 40.9 121.89
+Ankerite
+    CaFe(CO3)2 = Ca+2 + Fe+2 + 2 CO3-2
+    log_k -20.8732
+    -analytic 6743.141 2.308961 -252723.633 -2681.493 9.661065e6 -0.000880753
+    -Vm 66.06
+
+# --- Solucion de entrada: brina equilibrada con CO2 a la fugacidad de k15 ---
+SOLUTION 0 Brina_entrada
+    temp      50.0
+    pH        7.0
+    pe        4.0
+    units     mg/L
+    density   1.02
+    Na        10000.0
+    Mg        100.0
+    Ca        500.0
+    Fe        1.0
+    Cl        16000.0
+    Alkalinity 100.0 as HCO3
+    S(6)      10.0 as SO4
+    K         50.0
+    -pressure 100.0
+EQUILIBRIUM_PHASES 0
+    CO2(g)    2.0   10.0        # SI = log10(f_CO2 atm); actualizar por ventana
+SAVE solution 0
+END
+
+# --- Columna: agua nativa + rocas por celda ---
+SOLUTION 1-6 Agua_de_formacion
+    temp      50.0
+    pH        7.0
+    pe        4.0
+    units     mg/L
+    density   1.02
+    Na        10000.0
+    Mg        100.0
+    Ca        500.0
+    Fe        1.0
+    Cl        16000.0
+    Alkalinity 100.0 as HCO3
+    S(6)      10.0 as SO4
+    K         50.0
+
+EQUILIBRIUM_PHASES 1-6 Rocas_Rapidas
+    Calcite           0.0     0.5
+    Pyrite            0.0     0.1
+    Dawsonite         0.0     0.0
+    Ankerite          0.0     0.0
+    Gypsum            0.0     0.0
+# (el generador agrega CO2(g) SI por celda segun Sg,P de los datos,
+#  y KINETICS 1-6 con silicatos PK2004)
+END
+
+SELECTED_OUTPUT 1
+    -file           transporte_seed.txt
+    -reset          false
+    -distance       true
+    -time           true
+    -step           true
+    -solution       true
+    -pH             true
+    -alkalinity     true
+    -totals         Na Mg Ca Fe Cl C(4)
+    -equilibrium_phases Calcite Dawsonite Ankerite Gypsum
+    -si             Calcite CO2(g)
+
+# --- Una ventana (el generador emite un TRANSPORT por ventana) ---
+TRANSPORT
+    -cells             6
+    -shifts            10            # calibracion.parametros_transport
+    -time_step         1.0e7         # s  (= dz / v_frente)
+    -lengths           10 10 10 10 10 8    # reservorio dz; sello dz_sello (valores ficticios)
+    -dispersivities    1 1 1 1 1 0.8       # a_L = 0.1 dz
+    -diffusion_coefficient 1e-9            # m2/s; mezcla mecanica = a_L * v
+    -flow_direction    forward
+    -boundary_conditions flux flux
+    -punch_cells       1-6
+    -punch_frequency   6
+END
