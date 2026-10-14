@@ -3,9 +3,21 @@
   "upload_type": "software",
   "description": "Código Python del proyecto SHAKTI (UNAL, Facultad de Ingeniería), línea CCUS: columna 1D de transporte reactivo acoplada a resultados de flujo Cirrus y PHREEQC 3.8.6, con dos métodos (met1: celdas encadenadas; met2: TRANSPORT de PHREEQC). No incluye datos de entrada ni resultados.",
   "creators": [
-    {"name": "Romero León, Pedro José", "affiliation": "Universidad Nacional de Colombia"}
+    {
+      "name": "Romero Le?n, Pedro Jos?",
+      "affiliation": "Universidad Nacional de Colombia"
+    },
+    {
+      "name": "Rend?n, J."
+    }
   ],
   "license": "MIT",
-  "keywords": ["CCUS", "CO2 storage", "reactive transport", "PHREEQC", "SHAKTI"],
-  "notes": "TODO: confirmar coautores (Rendón, J.; ...; Donado, L. D.)"
+  "keywords": [
+    "CCUS",
+    "CO2 storage",
+    "reactive transport",
+    "PHREEQC",
+    "SHAKTI"
+  ],
+  "notes": "Pendiente: nombre completo y ORCID de J. Rend?n."
 }
