@@ -1,5 +1,7 @@
 # shakti-ccus-columna1d
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23353992.svg)](https://doi.org/10.5281/zenodo.23353992)
+
 Columna 1D de transporte reactivo para el almacenamiento geológico de CO2 en la Fm. La Paz con sello Fm. Esmeraldas (proyecto SHAKTI, Universidad Nacional de Colombia, Facultad de Ingeniería – línea CCUS).
 
 **English summary:** Python code for a 1D reactive-transport column for CO2 storage (La Paz Fm. reservoir, Esmeraldas Fm. seal). Gas saturation/pressure from the Cirrus flow simulator drives PHREEQC 3.8.6 geochemistry through two methods: *met1* (chained batch cells) and *met2* (PHREEQC `TRANSPORT`). **No site data, input files or results are distributed**: all project parameters are read from an external YAML file; the repository only ships `config/parametros_ejemplo.yaml` with clearly fictitious values that document the schema.
@@ -39,7 +41,9 @@ Los parámetros reales y los datos de Cirrus pertenecen al proyecto SHAKTI y se 
 - Comparación y figuras: scripts en `comparacion/`.
 
 ## Cómo citar
-Ver `CITATION.cff`. DOI de Zenodo: *pendiente*.
+Romero León, P. J., & Rendón, J. (2026). *SHAKTI CCUS – Columna 1D geoquímica (PHREEQC) acoplada a Cirrus* (v1.0.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23353992
+
+Metadatos en `CITATION.cff`.
 
 ## Licencia
 MIT (ver `LICENSE`).
